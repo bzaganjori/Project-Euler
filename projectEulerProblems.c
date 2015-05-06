@@ -2,9 +2,9 @@
 #include<stdlib.h>
 #include<math.h>
 
-/** Author: 	Benjamin Zaganjori
-		Toronto, Canada
-		27/04/2015
+/** Author: Benjamin Zaganjori
+			Toronto, Canada
+			27/04/2015
 */
 
 /** All problems that are in this file */
@@ -22,9 +22,7 @@ int problem11();	// Largest product in a grid
 int problem12();	// Highly divisible triangular number
 int problem13();	// Large sum
 int problem14();	// Longest Collatz sequence
-int problem15();	// Lattice paths
-int problem16();	// Power digit sum
-int problem17();	// Number letter counts
+int problem14A();	// 
 /* ################ */
 
 /** Helper functions ###### */
@@ -34,10 +32,10 @@ int isIntegerPalindrome(int i);	// Checks if input integer is palindrome
 
 int main() {
 	//problem1();			//Ans: 233168
-	//problem2(0, 1, 0);		//Ans: 4613732
+	//problem2(0, 1, 0);	//Ans: 4613732
 	//problem3();			//Ans: 6857
 	
-	//TODO: problem4();		//Ans: 906609
+	//TODO: problem4();				//Ans: 906609
 	
 	//problem5();			//Ans: 232792560
 	//problem6();			//Ans: 25164150
@@ -47,7 +45,8 @@ int main() {
 	//problem10();			//Ans: 142913828922
 	//problem11();			//Ans: 70600674
 	//problem12();			//Ans: 76576500
-	//problem13();
+	//problem13();			//Ans: 5537376230
+	problem14A(13, 0);			//Ans: 
 	return 0;
 }
 
@@ -66,6 +65,7 @@ int problem1() {
 	Default case: Find the value of the next fibonacci number. Check if even and recursively proceed */
 int problem2(int i, int j, int sum) {
 	int result;
+
 	if(j > 4000000) printf("Sum: %d", sum);
 	else {
 		result = i + j;
@@ -106,9 +106,7 @@ int problem4() {
 }
 
 /** Problem 5: Smallest multiple 
-Since were given an example at 2520, we can start there. Also, since we are 
-looking for multiples from1 - 20, we can increment the number by 20 as 
-optimization. This provides the most efficient answer. */
+Since were given an example at 2520, we can start there. Also, since we are  looking for multiples from1 - 20, we can increment the number by 20 as optimization. This provides the most efficient answer. */
 int problem5() {
 	unsigned int i;
 	for(i = 2540; ; i += 20) {
@@ -159,7 +157,7 @@ int problem8() {
 	int i, j, *array;
 	// Open and read file. Prompt if doesn't exist.
 	FILE *file;
-	file = fopen("p8Numbers.txt", "r");
+	file = fopen("p08Numbers.txt", "r");
 	if (file == NULL) {
 		printf("This file does not exist.");
 		exit(1);
@@ -182,6 +180,7 @@ int problem8() {
 		// Reset product
 		prod = 1;
 	}
+	free(array);
 	fclose(file);
 	printf("The largest product is: %lu\n", max);
 	return 0;
@@ -212,9 +211,7 @@ int problem10() {
 }
 
 /** Problem 11: Largest product in a grid 
-Read the numbers from a file and populate the array. Then, keeping in mind the accessing of
-non-existant memory, ie outside of the array, we focus our work between the 3rd index and 16th.
-For each number, find the product of the next 4 adjecent numbers.*/
+Read the numbers from a file and populate the array. Then, keeping in mind the accessing of non-existant memory, ie outside of the array, we focus our work between the 3rd index and 16th. For each number, find the product of the next 4 adjecent numbers.*/
 int problem11() {
 	int array[20][20], i, j, k, product = 1, max = 0;
 	FILE *file;
@@ -278,51 +275,74 @@ int problem12() {
 	return 0;
 }
 
-/** Problem 13: Large sum. Find the first 10 digits of the sum of the 100, 50 digit long numbers.*/
+/** Problem 13: Large sum. 
+Find the first 10 digits of the sum of the 100, 50 digit long numbers.*/
 int problem13() {
-	int array[100][51], i, j;
-	/** Create a pointer to the file. */
+	int array[100][50], i, j, c = 0;
+
+	/* Create file pointer and check if file is empty. */
 	FILE *file;
 	file = fopen("p13Numbers.txt", "r");
-	/** If the file is empty, prompt and exit. */
 	if (file == NULL) {
 		printf("This file does not exist.");
 		exit(1);
 	}
+	
 	/* Populate the array */
 	for(i = 0; i < 100; i++) {
-		for(j = 1; j < 51; j++) {
+		for(j = 0; j < 50; j++) {
 			fscanf(file, "%1d", &array[i][j]);
-		}
+		}	
 	}
-
-	for(i = 0; i < 100; i++) {
-		for(j = 0; j < 51; j++) {
-			printf("%d", array[i][j]);
-		}
-	}
-
-	/*for(i = 0; i < 100; i++) {
-		for(j = 51; j >= 0; j--) {
-			if(j = 0) {
-				array[
-			}
-			array[0][j] += array[i + 1][j] + c;
-			if(array[0][j] > 9) {
-				array[0][j] -= 10;
-				c = 1;
-			} else {
-				c = 0;
+	
+	/* Using single bit addition, calculate the sum of the large numbers */
+	for(i = 1; i < 100; i++) {
+		for(j = 49; j >= 0; j--) {
+			if(j == 0) array[0][0] += array[i][0] + c;
+			else {
+				array[0][j] += array[i][j] + c;
+				if(array[0][j] > 9) {
+					array[0][j] -= 10;
+					c = 1;	
+				} else {
+					c = 0;
+				}
 			}
 		}
-	}*/
-
+	}
+	
+	for(j = 0; j < 50; j++) printf("%d", array[0][j]);
+	printf("\n");
 	fclose(file);
 	return 0;
 }
 
+/** Problme 14: Longest Collatz sequence 
+Which starting number, under one million, produces the longest chain? */
 int problem14() {
-	return 0;
+	int i, maxIndex = 0;
+	double current, maxValue = 0;
+	for(i = 0; i < 1000000; i++) {
+		current = problem14A(i, 0);
+		if(current > maxValue) {
+			maxIndex = i;
+			maxValue = current;
+		}
+	}
+	printf("Index and value: %d %f\n", maxIndex, maxValue);
+}
+
+/** Helper function for problem 14 */
+int problem14A(int n, int count) {
+	if (n == 1) {
+		return count;
+	} else if(n % 2 == 0) {
+		n = n / 2;
+		problem14(n, count + 1);
+	} else {
+		n = (3 * n) + 1;
+		problem14(n, count + 1);
+	}
 }
 
 /** Check if input number is prime or not */
