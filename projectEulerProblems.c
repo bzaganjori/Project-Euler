@@ -7,10 +7,6 @@
 			27/04/2015
 */
 
-/** All problems that are in this file */
-int problem1();		// Multiples of 3 and 5
-int problem2();		// Even Fibonacci numbers
-int problem3();		// Largest prime factor
 int problem4();		// Largest plaindrome product
 int problem5();		// Smallest multiple
 int problem6();		// Sum square differences
@@ -31,10 +27,6 @@ int isIntegerPalindrome(int i);	// Checks if input integer is palindrome
 /* ######################## */
 
 int main() {
-	//problem1();			//Ans: 233168
-	//problem2(0, 1, 0);	//Ans: 4613732
-	//problem3();			//Ans: 6857
-	
 	//TODO: problem4();				//Ans: 906609
 	
 	//problem5();			//Ans: 232792560
@@ -47,44 +39,6 @@ int main() {
 	//problem12();			//Ans: 76576500
 	//problem13();			//Ans: 5537376230
 	problem14A(13, 0);			//Ans: 
-	return 0;
-}
-
-/** Problem 1: Multiples of 3 and 5 */
-int problem1() {
-	int i, sum = 0;
-	for(i = 1; i < 1000; i++) {
-		if(i % 3 == 0 || i % 5 == 0) sum += i;
-	}
-	printf("Sum: %d\n", sum);
-	return 0;
-}
-
-/** Problem 2: Even fibonacci numbers 
-	Base case: If we reach a fibonacci value greater than 4 million, print the current sum. 
-	Default case: Find the value of the next fibonacci number. Check if even and recursively proceed */
-int problem2(int i, int j, int sum) {
-	int result;
-
-	if(j > 4000000) printf("Sum: %d", sum);
-	else {
-		result = i + j;
-		if(result % 2 == 0) sum += result;
-		problem2(j, result, sum);
-	}
-	return 0;
-}
-
-/** Problem 3: Largest prime factor */
-int problem3() {
-	unsigned long i, number = 600851475143, largestFactor;
-	for (i = 0; i < number; i++) {
-		if (isPrime(i) == 1 && number % i == 0) {
-			printf("Current factor: %lu\n", i);
-			largestFactor = i;
-		}
-	}
-	printf("Largest Factor: %lu\n", largestFactor);
 	return 0;
 }
 
