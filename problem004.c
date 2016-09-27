@@ -7,28 +7,33 @@
  */
  
 int isIntegerPalindrome(int i) {
-	int reverse, remainder, temp;
-	temp = i;
-	while(temp != 0) {
-		remainder = temp % 10;
-		reverse = reverse * 10 + remainder;
-		temp /= 10;
+	int dig;
+	int num = i;
+	int rev = 0;
+	
+	while (num > 0) {
+		dig = num % 10;
+		rev = rev * 10 + dig;
+		num = num / 10;
 	}
-	if(reverse == i) return 1;
-	else return 0;
+	
+	return i == rev;
 }
 
 int main() {
-	unsigned int i, j, product;
+	unsigned int i;
+	unsigned int j;
+	unsigned int product;
+	
 	for(i = 999; i > 900; i--) {
 		for(j = 999; j > 900; j--) {
 			product = i * j;
 			if(isIntegerPalindrome(product) == 1) {
-				printf("%d", product);
-				break;
+				printf("Largest palindrome product: %d\n", product);
+				return 1;
 			}
 		}
 	}
-	printf("Largest palindrome product: %d\n", product);
+	
 	return 0;
 }

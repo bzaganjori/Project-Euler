@@ -12,7 +12,9 @@ int main() {
 		for(b = a; b < 500; b++) {
 			c = 1000 - (a + b);
 			if ((a * a) + (b * b) == (c * c)) {
-				if (a < b) printf("The triplet product is: %d\n", (a * b * c));
+				if (a < b) {
+					printf("The triplet product is: %d\n", (a * b * c));
+				}
 			}
 		}
 	}

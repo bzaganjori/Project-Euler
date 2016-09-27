@@ -7,8 +7,11 @@
  */
  
 int main() {
-	unsigned long prod = 1, max = 0;
-	int i, j, *array;
+	unsigned long prod = 1;
+	unsigned long max = 0;
+	int i;
+	int j;
+	int *array;
 
 	FILE *file;
 	file = fopen("p08Numbers.txt", "r");
@@ -23,15 +26,23 @@ int main() {
 		exit(1);
 	}
 
-	for(i = 0; i < 1000; i++) fscanf(file, "%1d", &array[i]);
+	for(i = 0; i < 1000; i++) {
+		fscanf(file, "%1d", &array[i]);
+	}
+	
 	for(i = 0; i < (1000 - 13); i++) {
-		for(j = 0; j < 13; j++)
+		for(j = 0; j < 13; j++) {
 			prod *= array[i + j];
-		if(prod > max) max = prod;
+		}
+		if(prod > max) {
+			max = prod;
+		}
 		prod = 1;
 	}
+	
 	free(array);
 	fclose(file);
 	printf("The largest product is: %lu\n", max);
+	
 	return 0;
 }

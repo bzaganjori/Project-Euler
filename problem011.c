@@ -7,7 +7,12 @@
  */
  
 int main() {
-	int array[20][20], i, j, k, product = 1, max = 0;
+	int array[20][20];
+	int i;
+	int j;
+	int k;
+	int product = 1;
+	int max = 0;
 
 	FILE *file;
 	file = fopen("p11Numbers.txt", "r");

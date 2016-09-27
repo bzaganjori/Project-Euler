@@ -7,7 +7,10 @@
  */
  
 int main() {
-	int array[100][50], i, j, c = 0;
+	int array[100][50];
+	int i;
+	int j;
+	int c = 0;
 
 	FILE *file;
 	file = fopen("p13Numbers.txt", "r");
@@ -24,8 +27,9 @@ int main() {
 	
 	for(i = 1; i < 100; i++) {
 		for(j = 49; j >= 0; j--) {
-			if(j == 0) array[0][0] += array[i][0] + c;
-			else {
+			if(j == 0) {
+				array[0][0] += array[i][0] + c;
+			} else {
 				array[0][j] += array[i][j] + c;
 				if(array[0][j] > 9) {
 					array[0][j] -= 10;
