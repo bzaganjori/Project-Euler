@@ -7,7 +7,10 @@
  */
  
 int main() {
-	int array[100][50], i, j, c = 0;
+	int array[100][50];
+	int i = 0;
+	int j = 0;
+	int c = 0;
 
 	FILE *file;
 	file = fopen("p13Numbers.txt", "r");
