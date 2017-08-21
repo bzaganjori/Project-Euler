@@ -8,8 +8,13 @@
  
 int main() {
 	int array[100][50];
+<<<<<<< HEAD
 	int i = 0;
 	int j = 0;
+=======
+	int i;
+	int j;
+>>>>>>> 1a502ab13b2bfdf6714b5e15b0630e1162af255d
 	int c = 0;
 
 	FILE *file;
@@ -27,8 +32,9 @@ int main() {
 	
 	for(i = 1; i < 100; i++) {
 		for(j = 49; j >= 0; j--) {
-			if(j == 0) array[0][0] += array[i][0] + c;
-			else {
+			if(j == 0) {
+				array[0][0] += array[i][0] + c;
+			} else {
 				array[0][j] += array[i][j] + c;
 				if(array[0][j] > 9) {
 					array[0][j] -= 10;

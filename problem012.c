@@ -13,7 +13,9 @@ int main() {
 		currentTriNum = i * (i + 1) / 2;
 		numOfFactors = 2;
 		for (j = 2; j < sqrt(currentTriNum); j++) {
-			if ((int)currentTriNum % (int)j == 0) numOfFactors += 2;
+			if ((int)currentTriNum % (int)j == 0) {
+				numOfFactors += 2;
+			}
 		}
 		i++;
 	}

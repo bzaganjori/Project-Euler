@@ -15,7 +15,7 @@ int main() {
 			&& i % 17 == 0 && i % 18 == 0
 			&& i % 19 == 0 && i % 20 == 0) {
 				printf("Smallest even multiple: %d\n", i);
-				break;
+				return 1;
 		}
 	}
 	return 0;
